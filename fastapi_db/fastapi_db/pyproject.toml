@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "backend"
+version = "0.1.0"
+description = ""
+authors = ["Hamza Rahim <hamzarahim836@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.110.0"
+uvicorn = "^0.30.1"
+sqlmodel = "^0.0.16"
+pytest = "^8.1.1"
+httpx = "^0.27.0"
+python-multipart = "^0.0.9"
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+psycopg = {extras = ["binary"], version = "^3.2.1"}
+fastapi-cors = "^0.0.6"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

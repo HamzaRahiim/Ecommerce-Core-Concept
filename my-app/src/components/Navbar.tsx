@@ -4,9 +4,26 @@ import Nav from "./Nav";
 import NavLink from "./NavLink";
 import { LuAlignLeft } from "react-icons/lu";
 import { useAppSelector } from "@/app/store/hooks";
+import { useAppDispatch } from "@/app/store/hooks";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { logout } from "@/app/store/features/authSlice";
+
 // navbar
 const Navbar = () => {
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+  const dispatch = useAppDispatch(); // Initialize the dispatch hook
+
+  const handleLogout = () => {
+    dispatch(logout()); // Dispatch the logout action
+  };
   return (
     <header className="flex flex-col items-center bg-purple-700">
       {/* div 1  */}
@@ -36,7 +53,30 @@ const Navbar = () => {
             {/* this nav component is also wanted to display on above the medium screen  */}
             <Nav />
             {isAuthenticated ? (
-              <h1>UserProfile</h1>
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <Avatar className="hover:cursor-pointer">
+                    <AvatarImage src="https://github.com/shadcn.png" />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>
+                    <Link href={"/user/profile"}>Profile</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link href={"/user/settings"}>Settings</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={handleLogout}
+                    className="hover:cursor-pointer text-red-500"
+                  >
+                    LogOut
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             ) : (
               <li>
                 <Link href={"/auth/login"}>login</Link>

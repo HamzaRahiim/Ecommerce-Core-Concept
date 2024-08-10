@@ -34,7 +34,7 @@ export const loginUser = createAsyncThunk(
 
       const data = await response.json();
       Cookies.set("access_token", data.access_token, {
-        expires: 1 / 1440, // 1 minute
+        expires: 15 / 1440, // 15 minute
         sameSite: "strict",
       });
 
